@@ -39,6 +39,8 @@
 <script>
 export default {};
 </script>
+
+<style scoped>
 .part {
   position: relative;
   width:165px;
@@ -127,5 +129,4 @@ export default {};
 .right .next-selector {
   right: -3px;
 }
-<style scoped>
 </style>
