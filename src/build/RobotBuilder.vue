@@ -4,7 +4,9 @@
       <div class="top-row">
         <div class="top part">
           <div class="robot-name">
-            <h2>{{selectedRobot.head.title}}</h2>
+            <h2>{{selectedRobot.head.title}}
+            <span v-show="selectedRobot.head.onSale" class="sale">Sale!</span>
+            </h2>
           </div>
           <img :src="selectedRobot.head.src" title="head" />
           <button @click="selectPrevHead()" class="prev-selector">&#9668;</button>
@@ -231,10 +233,17 @@ export default {
 }
 .robot-name {
   position: absolute;
-  top: -62px;
+  top: -70px;
   text-align: center;
   width: 100%;
   font-family: "DM Mono", monospace;
   font-weight: 500;
+}
+.robot-name h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+.sale {
+  color: red;
 }
 </style>
