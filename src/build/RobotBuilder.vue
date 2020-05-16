@@ -12,7 +12,7 @@
         <div class="left part">
           <img v-bind:src="availableParts.arms[selectedLeftArmIndex].src" title="left arm" />
           <button @click="selectPrevLeftArm()" class="prev-selector">&#9650;</button>
-          <button @click="selectNextLeftArms()" class="next-selector">&#9660;</button>
+          <button @click="selectNextLeftArm()" class="next-selector">&#9660;</button>
         </div>
         <div class="center part">
           <img v-bind:src="availableParts.torsos[selectedTorsoIndex].src" title="torso" />
@@ -20,16 +20,16 @@
           <button @click="selectNextTorso()" class="next-selector">&#9658;</button>
         </div>
         <div class="right part">
-          <img v-bind:src="availableParts.arms[selectedRighttArmIndex].src" title="right arm" />
-          <button @click="selectPrevRightArms()" class="prev-selector">&#9650;</button>
-          <button @click="selectPrevRIghtArm()" class="next-selector">&#9660;</button>
+          <img v-bind:src="availableParts.arms[selectedRightArmIndex].src" title="right arm" />
+          <button @click="selectPrevRightArm()" class="prev-selector">&#9650;</button>
+          <button @click="selectNextRightArm()" class="next-selector">&#9660;</button>
         </div>
       </div>
       <div class="bottom-row">
         <div class="bottom part">
           <img v-bind:src="availableParts.bases[selectedBaseIndex].src" title="base" />
-          <button class="prev-selector">&#9668;</button>
-          <button class="next-selector">&#9658;</button>
+          <button @click="selectPrevBase()" class="prev-selector">&#9668;</button>
+          <button @click="selectNextBase()" class="next-selector">&#9658;</button>
         </div>
       </div>
     </div>
@@ -53,7 +53,11 @@ export default {
   data() {
     return {
       availableParts,
-      selectedHeadIndex: 0
+      selectedHeadIndex: 0,
+      selectedLeftArmIndex: 0,
+      selectedTorsoIndex: 0,
+      selectedRightArmIndex: 0,
+      selectedBaseIndex: 0
     };
   },
   methods: {
@@ -70,10 +74,52 @@ export default {
       );
     },
     selectNextLeftArm() {
-
+      this.selectedLeftArmIndex = getNextValidIndex(
+        this.selectedLeftArmIndex,
+        availableParts.arms.length
+      );
     },
     selectPrevLeftArm() {
-
+      this.selectedLeftArmIndex = getPrevValidIndex(
+        this.selectedLeftArmIndex,
+        availableParts.arms.length
+      );
+    },
+    selectNextTorso() {
+      this.selectedTorsoIndex = getNextValidIndex(
+        this.selectedTorsoIndex,
+        availableParts.torsos.length
+      );
+    },
+    selectPrevTorso() {
+      this.selectedTorsoIndex = getPrevValidIndex(
+        this.selectedTorsoIndex,
+        availableParts.torsos.length
+      );
+    },
+    selectNextRightArm() {
+      this.selectedRightArmIndex = getNextValidIndex(
+        this.selectedRightArmIndex,
+        availableParts.torsos.length
+      );
+    },
+    selectPrevRightArm() {
+      this.selectedRightArmIndex = getPrevValidIndex(
+        this.selectedRightArmIndex,
+        availableParts.torsos.length
+      );
+    },
+    selectNextBase() {
+      this.selectedBaseIndex = getNextValidIndex(
+        this.selectedBaseIndex,
+        availableParts.bases.length
+      );
+    },
+    selectPrevBase() {
+      this.selectedBaseIndex = getPrevValidIndex(
+        this.selectedBaseIndex,
+        availableParts.bases.length
+      );
     }
   }
 };
