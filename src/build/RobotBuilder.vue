@@ -47,7 +47,7 @@
       <h1>Cart</h1>
       <table>
         <thead>
-          <tr>
+          <tr>4
             <th>Robot</th>
             <th class="cost">Cost</th>
           </tr>
