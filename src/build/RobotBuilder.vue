@@ -1,11 +1,16 @@
 <template>
-  <div>
+  <div class="content">
+    <button @click="addToCart()" class="add-to-cart">Add to Cart</button>
     <div>
       <div class="top-row">
         <div class="top part">
           <div class="robot-name">
-            <h2>{{selectedRobot.head.title}}
-            <span v-show="selectedRobot.head.onSale" class="sale">Sale!</span>
+            <h2>
+              {{selectedRobot.head.title}}
+              <span
+                v-show="selectedRobot.head.onSale"
+                class="sale"
+              >Sale!</span>
             </h2>
           </div>
           <img :src="selectedRobot.head.src" title="head" />
@@ -38,6 +43,23 @@
         </div>
       </div>
     </div>
+    <div>
+      <h1>Cart</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Robot</th>
+            <th class="cost">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(robot, index) in cart" :key="index">
+            <td>{{robot.head.title}}</td>
+            <td class="cost">{{robot.cost}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -58,6 +80,7 @@ export default {
   data() {
     return {
       availableParts,
+      cart: [],
       selectedHeadIndex: 0,
       selectedLeftArmIndex: 0,
       selectedTorsoIndex: 0,
@@ -77,6 +100,16 @@ export default {
     }
   },
   methods: {
+    addToCart() {
+      const robot = this.selectedRobot;
+      const cost =
+        robot.head.cost +
+        robot.leftArm.cost +
+        robot.torso.cost +
+        robot.rightArm.cost +
+        robot.base.cost;
+      this.cart.push(Object.assign({}, robot, { cost }));
+    },
     selectNextHead() {
       this.selectedHeadIndex = getNextValidIndex(
         this.selectedHeadIndex,
@@ -236,8 +269,8 @@ export default {
   top: -70px;
   text-align: center;
   width: 100%;
-  font-family: "DM Mono", monospace;
   font-weight: 500;
+  font-family: "DM Mono", monospace;
 }
 .robot-name h2 {
   margin: 0;
@@ -245,5 +278,25 @@ export default {
 }
 .sale {
   color: red;
+}
+.content {
+  position: relative;
+}
+.add-to-cart {
+  position: absolute;
+  right: 30px;
+  width: 220px;
+  padding: 2px;
+  font-family: "DM Mono", monospace;
+  font-size: 1rem;
+}
+td,
+th {
+  text-align: left;
+  padding: 5px;
+  padding-right: 20px;
+}
+.cost {
+  text-align: right;
 }
 </style>

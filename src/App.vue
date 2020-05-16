@@ -38,7 +38,6 @@ body {
 }
 main {
   margin: 0 auto;
-  padding: 10px;
   background-color: #fff;
   width: 1024px;
   min-height: 300px;
