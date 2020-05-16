@@ -42,6 +42,7 @@ main {
   background-color: #fff;
   width: 1024px;
   min-height: 300px;
+  padding: 3rem;
 }
 header {
   background-color: #999;
