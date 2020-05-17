@@ -3,7 +3,7 @@
     <button @click="addToCart()" class="add-to-cart">Add to Cart</button>
     <div>
       <div class="top-row">
-        <div class="top part">
+        <div :class="[saleBorderClass, 'top', 'part']">
           <div class="robot-name">
             <h2>
               {{selectedRobot.head.title}}
@@ -47,7 +47,7 @@
       <h1>Cart</h1>
       <table>
         <thead>
-          <tr>4
+          <tr>
             <th>Robot</th>
             <th class="cost">Cost</th>
           </tr>
@@ -89,6 +89,9 @@ export default {
     };
   },
   computed: {
+    saleBorderClass() {
+      return this.selectedRobot.head.onSale ? "onSale" : "";
+    },
     selectedRobot() {
       return {
         head: availableParts.heads[this.selectedHeadIndex],
@@ -298,5 +301,9 @@ th {
 }
 .cost {
   text-align: right;
+}
+.onSale {
+  border: 2px solid orangered;
+  border-radius: .4rem;
 }
 </style>
