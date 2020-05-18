@@ -65,6 +65,7 @@
 
 <script>
 import availableParts from "../data/parts";
+import createdHookMixin from "./created-hook-mixin";
 
 function getPrevValidIndex(index, length) {
   const deprecatedIndex = index - 1;
@@ -77,6 +78,13 @@ function getNextValidIndex(index, length) {
 }
 export default {
   name: "RobotBuilder",
+  mixins: [createdHookMixin],
+  beforeCreate() {
+    console.log("component before created");
+  },
+  mounted() {
+    console.log("component mounted");
+  },
   data() {
     return {
       availableParts,
@@ -177,7 +185,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .part {
   position: relative;
   width: 165px;
@@ -274,10 +282,10 @@ export default {
   width: 100%;
   font-weight: 500;
   font-family: "DM Mono", monospace;
-}
-.robot-name h2 {
-  margin: 0;
-  font-size: 1rem;
+  h2 {
+    margin: 0;
+    font-size: 1rem;
+  }
 }
 .sale {
   color: red;
@@ -304,6 +312,6 @@ th {
 }
 .onSale {
   border: 2px solid orangered;
-  border-radius: .4rem;
+  border-radius: 0.4rem;
 }
 </style>
