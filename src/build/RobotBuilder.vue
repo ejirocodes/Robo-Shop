@@ -13,22 +13,22 @@
               >Sale!</span>
             </h2>
           </div>
-          <PartSelector />
+          <PartSelector :parts="availableParts.heads" position="top"/>
         </div>
       </div>
       <div class="middle-row">
         <div class="left part">
-          <PartSelector />
+          <PartSelector :parts="availableParts.arms" position="left"/>
         </div>
         <div class="center part">
-          <PartSelector />
+          <PartSelector :parts="availableParts.torsos" position="center"/>
         </div>
         <div class="right part">
-          <PartSelector />
+          <PartSelector :parts="availableParts.arms" position="right"/>
         </div>
       </div>
       <div class="bottom-row">
-        <PartSelector />
+        <PartSelector :parts="availableParts.bases" position="bottom"/>
       </div>
     </div>
     <div>
