@@ -20,7 +20,7 @@
     </div>
     <div>
       <div class="top-row">
-        <!-- <div class="robot-name">
+        <div class="robot-name">
             <h2>
               {{selectedRobot.head.title}}
               <span
@@ -28,7 +28,7 @@
                 class="sale"
               >Sale!</span>
             </h2>
-        </div>-->
+        </div>
         <PartSelector
           :parts="availableParts.heads"
           position="top"

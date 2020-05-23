@@ -4,25 +4,23 @@
       <nav>
         <ul>
           <li class="nav-item">
-            <img src="./assets/build-a-bot-logo.png" alt="logo" class="logo" />
-            Build a bot
+            <router-link class="nav-link" :to="{name: 'Home'}">
+              <img src="./assets/build-a-bot-logo.png" alt="logo" class="logo" />
+              Build a bot
+            </router-link>
           </li>
         </ul>
       </nav>
     </header>
     <main>
-      <RobotBuilder />
+      <router-view></router-view>
     </main>
   </div>
 </template>
 
 <script>
-import RobotBuilder from "./build/RobotBuilder.vue";
 export default {
-  name: "App",
-  components: {
-    RobotBuilder
-  }
+  name: "App"
 };
 </script>
 <style>
@@ -60,5 +58,9 @@ ul {
 .logo {
   vertical-align: middle;
   height: 30px;
+}
+.nav-link {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
