@@ -1,10 +1,24 @@
 <template>
   <div class="content">
+    <div class="preview">
+      <div class="preview-content">
+        <div class="top-row">
+          <img :src="selectedRobot.head.src" />
+        </div>
+        <div class="middle-row">
+          <img :src="selectedRobot.leftArm.src" class="rotate-left" />
+          <img :src="selectedRobot.torso.src" />
+          <img :src="selectedRobot.rightArm.src" class="rotate-right" />
+        </div>
+        <div class="bottom-row">
+          <img :src="selectedRobot.base.src" />
+        </div>
+      </div>
+    </div>
     <button @click="addToCart()" class="add-to-cart">Add to Cart</button>
     <div>
       <div class="top-row">
-        <div :class="[saleBorderClass, 'top', 'part']">
-          <div class="robot-name">
+        <!-- <div class="robot-name">
             <h2>
               {{selectedRobot.head.title}}
               <span
@@ -12,23 +26,42 @@
                 class="sale"
               >Sale!</span>
             </h2>
-          </div>
-          <PartSelector :parts="availableParts.heads" position="top"/>
-        </div>
+        </div>-->
+        <PartSelector
+          :parts="availableParts.heads"
+          position="top"
+          @partSelected="part => selectedRobot.head=part"
+        />
       </div>
       <div class="middle-row">
         <div class="left part">
-          <PartSelector :parts="availableParts.arms" position="left"/>
+          <PartSelector
+            :parts="availableParts.arms"
+            position="left"
+            @partSelected="part => selectedRobot.leftArm=part"
+          />
         </div>
         <div class="center part">
-          <PartSelector :parts="availableParts.torsos" position="center"/>
+          <PartSelector
+            :parts="availableParts.torsos"
+            position="center"
+            @partSelected="part => selectedRobot.torso=part"
+          />
         </div>
         <div class="right part">
-          <PartSelector :parts="availableParts.arms" position="right"/>
+          <PartSelector
+            :parts="availableParts.arms"
+            position="right"
+            @partSelected="part => selectedRobot.rightArm=part"
+          />
         </div>
       </div>
       <div class="bottom-row">
-        <PartSelector :parts="availableParts.bases" position="bottom"/>
+        <PartSelector
+          :parts="availableParts.bases"
+          position="bottom"
+          @partSelected="part => selectedRobot.base=part"
+        />
       </div>
     </div>
     <div>
@@ -209,7 +242,8 @@ export default {
 }
 .add-to-cart {
   position: absolute;
-  right: 30px;
+  right: 0;
+  top: 8rem;
   width: 220px;
   padding: 2px;
   font-family: "DM Mono", monospace;
@@ -227,5 +261,26 @@ th {
 .onSale {
   border: 2px solid orangered;
   border-radius: 0.4rem;
+}
+.preview {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 210px;
+  height: 210px;
+  padding: 5px;
+}
+.preview-content {
+  border: 1px solid #999;
+}
+.preview img {
+  width: 50px;
+  height: 50px;
+}
+.rotate-right {
+  transform: rotate(90deg);
+}
+.rotate-left {
+  transform: rotate(-90deg);
 }
 </style>
