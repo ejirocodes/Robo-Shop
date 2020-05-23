@@ -4,10 +4,13 @@
       <nav>
         <ul>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'Home'}">
+            <router-link active-class="foo" exact class="nav-link" :to="{name: 'Home'}">
               <img src="./assets/build-a-bot-logo.png" alt="logo" class="logo" />
               Build a bot
             </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link active-class="foo" exact class="nav-link" :to="{name: 'Build'}">Build</router-link>
           </li>
         </ul>
       </nav>
@@ -62,5 +65,8 @@ ul {
 .nav-link {
   text-decoration: none;
   color: inherit;
+}
+.foo {
+  color: #fff;
 }
 </style>
