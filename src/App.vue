@@ -15,9 +15,14 @@
         </ul>
       </nav>
     </header>
+    <div class="container">
+      <aside class="aside">
+        <router-view name="sidebar"></router-view>
+      </aside>
     <main>
       <router-view></router-view>
     </main>
+    </div>
   </div>
 </template>
 
@@ -37,15 +42,14 @@ body {
   font-family: "Avenir", Arial, Helvetica, sans-serif;
 }
 main {
-  margin: 0 auto;
   background-color: #fff;
-  width: 1024px;
+  width: 964px;
   min-height: 300px;
   padding: 6rem 0;
 }
 header {
   background-color: #999;
-  width: 1084px;
+  width: 1184px;
   margin: 0 auto;
 }
 ul {
@@ -68,5 +72,16 @@ ul {
 }
 .foo {
   color: #fff;
+}
+.container {
+  display: flex;
+  margin: 10px auto 0 10px;
+  justify-content: center;
+}
+.aside {
+  padding: 30px;
+  background-color: #aaa;
+  width: 100px;
+  min-height: 300px;
 }
 </style>
