@@ -1,33 +1,30 @@
 <template>
   <div class="content">
     <div class="preview">
-    <CollapsibleSection>
-      <div class="preview-content">
-        <div class="top-row">
-          <img :src="selectedRobot.head.src" />
+      <CollapsibleSection>
+        <div class="preview-content">
+          <div class="top-row">
+            <img :src="selectedRobot.head.src" />
+          </div>
+          <div class="middle-row">
+            <img :src="selectedRobot.leftArm.src" class="rotate-left" />
+            <img :src="selectedRobot.torso.src" />
+            <img :src="selectedRobot.rightArm.src" class="rotate-right" />
+          </div>
+          <div class="bottom-row">
+            <img :src="selectedRobot.base.src" />
+          </div>
         </div>
-        <div class="middle-row">
-          <img :src="selectedRobot.leftArm.src" class="rotate-left" />
-          <img :src="selectedRobot.torso.src" />
-          <img :src="selectedRobot.rightArm.src" class="rotate-right" />
-        </div>
-        <div class="bottom-row">
-          <img :src="selectedRobot.base.src" />
-        </div>
-      </div>
-    </CollapsibleSection> 
-    <button @click="addToCart()" class="add-to-cart">Add to Cart</button>
+      </CollapsibleSection>
+      <button @click="addToCart()" class="add-to-cart">Add to Cart</button>
     </div>
     <div>
       <div class="top-row">
         <div class="robot-name">
-            <h2>
-              {{selectedRobot.head.title}}
-              <span
-                v-show="selectedRobot.head.onSale"
-                class="sale"
-              >Sale!</span>
-            </h2>
+          <h2>
+            {{selectedRobot.head.title}}
+            <span v-show="selectedRobot.head.onSale" class="sale">Sale!</span>
+          </h2>
         </div>
         <PartSelector
           :parts="availableParts.heads"
@@ -66,23 +63,6 @@
         />
       </div>
     </div>
-    <div>
-      <h1>Cart</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Robot</th>
-            <th class="cost">Cost</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(robot, index) in cart" :key="index">
-            <td>{{robot.head.title}}</td>
-            <td class="cost">{{robot.cost}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </template>
 
@@ -94,12 +74,14 @@ import CollapsibleSection from "../shared/CollapsibleSection.vue";
 
 export default {
   name: "RobotBuilder",
-  beforeRouteLeave (to, from, next) {
-    if(this.addedToCart) {
-      next(true)
+  beforeRouteLeave(to, from, next) {
+    if (this.addedToCart) {
+      next(true);
     } else {
-      const response = confirm('You have not added your robot to your cart, are you sure you want to leave?')
-      next(response)
+      const response = confirm(
+        "You have not added your robot to your cart, are you sure you want to leave?"
+      );
+      next(response);
     }
   },
   components: { PartSelector, CollapsibleSection },
@@ -138,7 +120,7 @@ export default {
         robot.torso.cost +
         robot.rightArm.cost +
         robot.base.cost;
-      this.cart.push(Object.assign({}, robot, { cost }));
+      this.$store.commit("addRobotToCart", Object.assign({}, robot, { cost }));
       this.addedToCart = true;
     }
   }
@@ -259,15 +241,6 @@ export default {
   padding: 2px;
   font-family: "DM Mono", monospace;
   font-size: 1rem;
-}
-td,
-th {
-  text-align: left;
-  padding: 5px;
-  padding-right: 20px;
-}
-.cost {
-  text-align: right;
 }
 .onSale {
   border: 2px solid orangered;
